@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Betway SA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #0c0c0c;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center; /* Center vertically */
+            position: relative;
+        }
+
+        /* Hamburger Menu Icon */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            left: 20px; /* Position it at the left corner */
+            margin-top: -11px; /* Move the hamburger icon 4px up */
+        }
+
+        .hamburger div {
+            background-color: #fff;
+            height: 4px;
+            width: 100%;
+        }
+
+        header .logo {
+            margin-left: 50px; /* To make space for the hamburger icon */
+        }
+
+        header .logo img {
+            width: 150px;  /* Adjust size of the logo */
+        }
+
+        /* Navbar (hidden by default on mobile) */
+        nav {
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #ff5c5c;
+        }
+
+        /* Mobile Menu (Initially hidden) */
+        .menu {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: #111;
+            padding: 10px 0;
+        }
+
+        .menu a {
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2em;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('betway2.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        .hero .btn {
+            background-color: #ff5c5c;
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero .btn:hover {
+            background-color: #e04f4f;
+        }
+
+        /* Machine Section */
+        .machine {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .machine h2 {
+            margin-bottom: 20px;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .betway-code {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ff5c5c;
+            display: none; /* Hidden by default */
+        }
+
+        /* Form Inputs */
+        input, select {
+            padding: 10px;
+            font-size: 1em;
+            margin: 10px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .cyanide-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 300px;
+            margin: 10px auto;
+        }
+
+        .cyanide-container input {
+            flex-grow: 1;
+        }
+
+        .cyanide-btn {
+            background-color: #ff5c5c;
+            color: white;
+            font-size: 1.5em;
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .cyanide-btn:hover {
+            background-color: #e04f4f;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff5c5c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e04f4f;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.1em;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .hero .btn {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+
+            footer {
+                padding: 10px 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .hero .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="logo">
+            <img src="betwaylogo.png" alt="Betway Logo">
+        </div>
+    </header>
+
+    <!-- Navbar Section -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Sports</a>
+        <a href="#">Live Betting</a>
+        <a href="#">Casino</a>
+        <a href="#">Promotions</a>
+        <a href="#">Login</a>
+        <a href="#">Betting tips</a>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="menu" id="menu">
+        <a href="https://www.betway.co.za/blog" target="_blank">Insider Blog</a>
+        <a href="https://www.betway.co.za/latestpromos" target="_blank">Promotions</a>
+        <a href="https://www.betway.co.za/Betway-App" target="_blank">Betway App</a>
+        <a href="https://www.betway.co.za/contactpage" target="_blank">Contact us</a>
+        <a href="https://www.betway.co.za/LiveScores" target="_blank">Live scores</a>
+        <a href="https://www.betway.co.za/betting-rules-and-tips" target="_blank">Betting rules</a>
+        <a href="https://www.betway.co.za/blog" target="_blank">Betting tips</a>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h2></h2>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <div class="machine">
+            <h2>Analyzing Football Leagues...</h2>
+
+            <!-- Cyanide Key Input and Button -->
+            <div class="cyanide-container">
+                <input type="text" id="cyanideKey" placeholder="Enter Cyanide Key" />
+                <a href="https://www.paypal.com/ncp/payment/W5H7P8UHBRPE6" target="_blank">
+                    <div class="cyanide-btn">💰</div>
+                </a>
+            </div>
+
+            <!-- Bet Amount and Other Fields -->
+            <input type="number" id="betAmount" placeholder="Enter Bet Amount" />
+            <select id="league">
+                <option value="" disabled selected>Select League</option>
+                <option value="Premier League">Premier League</option>
+                <option value="La Liga">La Liga</option>
+                <option value="Bundesliga">Bundesliga</option>
+                <option value="Serie A">Serie A</option>
+                <option value="PSL">Premier Soccer League</option>
+            </select>
+            <input type="date" id="date" />
+            <button id="generateBtn">Generate Betway Code</button>
+
+            <!-- Loading Spinner -->
+            <div class="loader" id="loader" style="display: none;"></div>
+
+            <!-- Generated Betway Code -->
+            <div class="betway-code" id="betwayCode">
+                <p>Generated Betway Code: <span id="betwayCodeText">X93D76E2D</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Betway South Africa. All Rights Reserved.</p>
+        <p>
+            <a href="#">Terms & Conditions</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Contact Us</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript to Toggle Menu and Handle Data Generation -->
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const menu = document.getElementById("menu");
+        const generateBtn = document.getElementById("generateBtn");
+        const betwayCode = document.getElementById("betwayCode");
+        const betwayCodeText = document.getElementById("betwayCodeText");
+        const loader = document.getElementById("loader");
+
+        hamburger.addEventListener("click", () => {
+            menu.classList.toggle("active");
+        });
+
+        generateBtn.addEventListener("click", () => {
+            const betAmount = document.getElementById("betAmount").value;
+            const league = document.getElementById("league").value;
+            const date = document.getElementById("date").value;
+
+            if (betAmount && league && date) {
+                // Show the loading spinner and message
+                loader.style.display = 'block';
+                betwayCode.style.display = 'none';
+                betwayCodeText.textContent = "Collecting data...";
+
+                // Wait for 8 seconds before showing the "Cyanide key not found" message
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    betwayCode.style.display = 'block';
+                    betwayCodeText.textContent = "X93D76E2D"; // New code inserted here
+                }, 8000);
+            } else {
+                alert('Please fill in all fields!');
+            }
+        });
+    </script>
+</body>
+</html>
